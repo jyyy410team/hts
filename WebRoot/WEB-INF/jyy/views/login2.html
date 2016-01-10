@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>login.html</title>
+	<#include "/jyy/views/head.html"/>
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body>
+       <!--  <#if title=="a">
+        
+        ${title}  </#if> -->
+        
+ <!-- <img src="${base}/yzm/yzm.do" onclick="this.src='${base}/yzm/yzm.do?d='+new Date()*1" width="80" height="40" id="kaptchaImage"  style="margin-bottom: -3px"/>   
+        	<a href="/${base}/jyy2/captcha-image.do" >yzm</a> -->
+        
+     <@p.form id="jvForm" action="o_save.do" labelWidth="12">
+  
+<@p.text colspan="1" width="50" label="nameddddddddd" name="field" required="true" class="required" maxlength="50"/>
+<@p.text colspan="1" width="50" label="pass" name="label" required="true" class="required" maxlength="100"/>
+
+<@p.tr/>
+<@p.select colspan="1" width="50" label="name" name="dataType" required="true" list={"1":"cmsModelItem.type1","2":"cmsModelItem.type2","3":"cmsModelItem.type3","4":"cmsModelItem.type4","5":"cmsModelItem.type5","6":"cmsModelItem.type6","7":"cmsModelItem.type7","8":"cmsModelItem.type8"}/>
+<@p.text colspan="1" width="50" label="pass" name="priority" value="70" required="true" class="required digits" maxlength="10"/><@p.tr/>
+
+	
+
+</@p.form>
+        
+  </body>
+</html>

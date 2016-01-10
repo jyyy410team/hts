@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+<base href="${base}/res/">
+<meta charset="UTF-8">
+
+<link rel="stylesheet" href="css/login.css">
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<title>后台登陆</title>
+
+</head>
+<body>
+	<div id="login_top">
+		<div id="welcome">欢迎使用jyy管理系统</div>
+		<div id="back">
+			<a href="#">返回首页</a>&nbsp;&nbsp; | &nbsp;&nbsp; <a href="#">帮助</a>
+		</div>
+	</div>
+	<div id="login_center">
+		<div id="login_area">
+			<div id="login_form">
+
+				<@p.form id="jvForm" action="${base}/login2.do" labelWidth="12">
+				<div id="login_tip">用户登录${title}&nbsp;&nbsp;UserLogin</div>
+				<div>
+					<input type="text" class="username" name="username">
+				</div>
+				<div>
+					<input type="text" class="password" name="password">
+				</div>
+				<div id="btn_area">
+
+					<input type="submit" name="submit" id="sub_btn"
+						value="登&nbsp;&nbsp;录">&nbsp;&nbsp; <input type="text" name="yzm"
+						class="verify"> <img src="${base}/yzm/yzm.do"
+						onclick="this.src='${base}/yzm/yzm.do?d='+new Date()*1" width="80"
+						height="40" id="kaptchaImage" />
+				</div>
+				</@p.form>
+			</div>
+		</div>
+	</div>
+	<div id="login_bottom">版权所有</div>
+</body>
+</html>
