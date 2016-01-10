@@ -7,17 +7,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "jc_role")
+/*@Entity
+@Table(name = "jc_role")*/
 public class CmsRole {
 	private Integer roleid;
 	private Integer siteid;
 	private String rolename;
 	private Integer issupper;
-
+/*
 	@Id
 	@Column(name = "role_id")
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.AUTO)*/
 	public Integer getRoleid() {
 		return roleid;
 	}
@@ -26,7 +26,7 @@ public class CmsRole {
 		this.roleid = roleid;
 	}
 
-	@Column(name = "site_id")
+	/*@Column(name = "site_id")*/
 	public Integer getSiteid() {
 		return siteid;
 	}
@@ -34,8 +34,8 @@ public class CmsRole {
 	public void setSiteid(Integer siteid) {
 		this.siteid = siteid;
 	}
-
-	@Column(name = "role_name")
+/*
+	@Column(name = "role_name")*/
 	public String getRolename() {
 		return rolename;
 	}
@@ -45,7 +45,7 @@ public class CmsRole {
 
 	}
 
-	@Column(name = "is_super")
+	/*@Column(name = "is_super")*/
 	public Integer getIssupper() {
 		return issupper;
 	}
