@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jeecms.cms.dao.Pager;
 import com.jeecms.cms.domain.CmsRole;
-import com.jeecms.cms.service.LoginService;
+import com.jeecms.login.service.LoginService;
 
 @Controller
 @RequestMapping(value = "/student")
