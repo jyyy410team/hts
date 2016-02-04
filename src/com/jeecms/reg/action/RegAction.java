@@ -28,7 +28,6 @@ public class RegAction {
 
 	@RequestMapping(value = "reg")
 	public String regView() {
-
 		return "reg";
 	}
 
