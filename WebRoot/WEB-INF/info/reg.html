@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<base href="${base}/">
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/select.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.idTabs.min.js"></script>
+<script type="text/javascript" src="js/select-ui.min.js"></script>
+<script type="text/javascript" src="editor/kindeditor.js"></script>
+
+
+  
+
+<script type="text/javascript">
+	KE.show({
+		id : 'content7',
+		cssPath : './index.css'
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(e) {
+		$(".select1").uedSelect({
+			width : 345
+		});
+		$(".select2").uedSelect({
+			width : 167
+		});
+		$(".select3").uedSelect({
+			width : 100
+		});
+	});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+  if('${msg}'!=''){
+   $(".tip").fadeIn(200);
+
+  
+}
+
+  $(".sure").click(function(){
+  $(".tip").fadeOut(100);
+});
+
+  $(".cancel").click(function(){
+  $(".tip").fadeOut(100);
+});
+
+});
+</script>
+</head>
+
+<body>
+  
+<form action="${base}/reg2.do" id="defaultForm" method="post" class="form-horizontal">
+	<div class="place">
+		<span>位置：</span>
+		<ul class="placeul">
+			<li><a href="${base}/login.do">首页</a></li>
+			<li><a >注册</a></li>
+		</ul>
+	</div>
+
+
+	<DIV class=clear></DIV>
+	<DIV
+		style="PADDING-BOTTOM: 20px; MARGIN: 0px auto; PADDING-LEFT: 50px; WIDTH: 870px; PADDING-RIGHT: 50px; PADDING-TOP: 10px">
+		<DIV
+			style="PADDING-BOTTOM: 2px; LINE-HEIGHT: 24px; PADDING-LEFT: 20px; PADDING-RIGHT: 20px; BACKGROUND: #fafafa; PADDING-TOP: 20px">
+			<SPAN class="f_b">&gt;&gt;&nbsp;已经是会员？请点： <A class=susua
+				href="${base}/login.do"><FONT color=red><FONT  style="font-size: 25px">登录</FONT>
+				</FONT> </A>！ &nbsp;忘记了密码？ 请点： <A class=susua href="../system/contact.php">联系客服找回</A>！</SPAN><BR>
+
+				<div>
+					&gt;&gt;&nbsp;请认真、仔细地填写以下信息，<a style="color: red">*</a><a>为必填项</a>
+				</div>
+		</DIV>
+		<BR>
+		<div class="formbody">
+
+
+			<div id="usual1" class="usual">
+
+				<div class="itab">
+					<ul>
+						<li><a href="#tab1" class="selected">账户信息</a></li>
+
+					</ul>
+				</div>
+
+
+				<div id="tab1" class="tabson">
+
+					<div class="formtext">
+						Hi，<b></b>，欢迎您使用系统功能！
+					</div>
+
+					<ul class="forminfo">
+
+						<li><label>会员类型<b>*</b> </label>
+
+
+							<div class="vocation">
+								<select class="select1" name="flag">
+									<option value="3">企业用户</option>
+									<option value="2">加盟合作用户</option>
+
+								</select>
+							</div>
+						</li>
+
+
+
+						<li><label>会员名：<b>*</b> </label><input name="VipUser" type="text"
+							class="dfinput" value="" /></li>
+
+						<li><label>登录密码：<b>*</b> </label><input name="VipPass" type="text" 
+							class="dfinput" value="" />&nbsp;密码不能小于6个字符</li>
+
+
+						<li><label>重复输入密码<b>*</b> </label><input name="pass2" type="text"
+							class="dfinput" value="" /></li>
+					</ul>
+
+				</div>
+				<div class="itab">
+					<ul>
+						<li><a href="#tab1" class="selected">联系方式</a></li>
+
+					</ul>
+				</div>
+
+
+
+
+				<div id="tab1" class="tabson">
+
+
+					<ul class="forminfo">
+
+
+
+
+						<li><label>电子邮箱：<b>*</b> </label><input name="myemail" type="text"
+							class="dfinput" value="" />
+							
+							
+							
+							</li>
+
+						<li><label>QQ号码：<b>*</b> </label><input name="qq" type="text"
+							class="dfinput" value="" /></li>
+
+
+						<li><label>联系电话：<b>*</b> </label><input name="dianhua" type="text"
+							class="dfinput" value="" /></li>
+
+
+
+						<li><label>网站地址：<b>*</b> </label><input name="weburl" type="text"
+							class="dfinput" value="" /></li>
+
+						<li><label>验证码：<b>*</b> </label>
+						
+						<div style="height:53px">
+						<input name="code" type="text"
+							class="dfinput"	 value="" style="width:260px" />
+							
+							<img src="${base}/yzm.do" align="top" onclick="this.src='${base}/yzm.do?d='+new Date()*1" style="width: 87px;height: 34px;margin-bottom: 0;"/>
+							
+							</div>
+							</li>
+					</ul>
+
+				</div>
+				
+				
+<a class="click">adf</a>
+<input name="" type="submit" class="loginbtn" value="立即注册" style="margin-left: 30%"
+					/>
+
+			</div>
+
+			<script type="text/javascript">
+				$("#usual1 ul").idTabs();
+			</script>
+
+			<script type="text/javascript">
+				$('.tablelist tbody tr:odd').addClass('odd');
+			</script>
+
+
+
+
+
+		</div></form>
+		
+			<div class="tip">
+    	<div class="tiptop"><span>提示信息</span><a></a></div>
+        
+      <div class="tipinfo">
+        <span><img src="images/ticon.png" /></span>
+        <div class="tipright">
+      <br/>
+        <p>${msg}</p>
+       
+        </div>
+        </div>
+        
+        <div class="tipbtn">
+        <input name="" type="button"  class="sure" value="确定" />&nbsp;
+        </div>
+    
+    </div>
+</body>
+
+</html>

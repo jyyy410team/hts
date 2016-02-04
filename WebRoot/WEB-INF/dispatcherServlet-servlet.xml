@@ -122,7 +122,7 @@
 		<!-- 加载hibernate的jpa注解形式的实体类 -->
 		<property name="packagesToScan">
 			<list>
-				<value>com.jeecms.cms.domain</value>
+				<value>com.jeecms</value>
 			</list>
 		</property>
 		<!-- <property name="mappingResources"> <list> <value>test/CmsRole.hbm.xml</value> 
