@@ -115,7 +115,7 @@
 				hibernate.query.substitutions=true 1,
 				false 0
 				hibernate.jdbc.batch_size=20
-				hibernate.cache.use_query_cache=false
+				hibernate.cache.use_query_cache=false 
 			</value>
 		</property>
 
