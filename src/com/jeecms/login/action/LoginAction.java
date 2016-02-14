@@ -1,5 +1,6 @@
 package com.jeecms.login.action;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -62,7 +63,10 @@ public class LoginAction {
 		if (user.getYzm().equalsIgnoreCase(code)) {
 			model.addAttribute("msg", "验证码错误!");
 		} else {
+			Cookie cookie = new Cookie("AdminUser", user.getUserName());
+			response.addCookie(cookie );
 			return "main";
+			
 		}
 
 		return "login";
