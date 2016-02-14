@@ -7,11 +7,71 @@
     <meta http-equiv="description" content="this is my page">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     
-    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+    <style type="text/css">
+    /*tip*/
+.tip{width:485px; height:260px; position:absolute;top:35%; left:30%;background:#fcfdfd;box-shadow:1px 8px 10px 1px #9b9b9b;border-radius:1px;behavior:url(js/pie.htc); display:none; z-index:111111;}
+.tiptop{height:40px; line-height:40px; background:url(images/tcbg.gif)  repeat-x; cursor:pointer;}
+.tiptop span{font-size:14px; font-weight:bold; color:#fff;float:left; text-indent:20px;}
+.tiptop a{display:block; background:url(images/close.png) no-repeat; width:22px; height:22px;float:right;margin-right:7px; margin-top:10px; cursor:pointer;}
+.tiptop a:hover{background:url(images/close1.png) no-repeat;}
+.tipinfo{padding-top:30px;margin-left:65px; height:95px;}
+.tipinfo span{width:95px; height:95px;float:left;}
+.tipright{float:left;padding-top:15px; padding-left:10px;}
+.tipright p{font-size:14px; font-weight:bold; line-height:35px;}
+.tipright cite{color:#858686;}
+.tipbtn{margin-top:25px; margin-left:125px;}
+.sure ,.cancel{width:96px; height:35px; line-height:35px; color:#fff; background:url(images/btnbg1.png) repeat-x; font-size:14px; font-weight:bold;border-radius: 3px; cursor:pointer;}
+.cancel{background:url(images/btnbg2.png) repeat-x;color:#000;font-weight:normal;}
 
-  </head>
+.loginbtn{width:111px;height:35px; background:url(images/buttonbg.png) repeat-x; font-size:14px; font-weight:bold; color:#fff;cursor:pointer; line-height:35px;}
+
+    </style>
+<script type="text/javascript" src="js/jquery.js"></script>
+<SCRIPT language=javascript type=text/javascript src="images/admin/images/jquery.min.js"></SCRIPT>
+
+
+  </head><script type="text/javascript">
+$(document).ready(function(){
+
+
+
+  $(".sure").click(function(){
+  $(".tip").fadeOut(100);
+});
+  $(".tiptop a").click(function(){
+  $(".tip").fadeOut(200);
+});
+
+  $(".cancel").click(function(){
+  $(".tip").fadeOut(100);
+});
+
+});
+</script>
   
   <body>
+  
+  <div class="tip" style="display: none">
+    	<div class="tiptop"><span>提示信息</span><a></a></div>
+        
+      <div class="tipinfo">
+        <span><img src="images/ticon.png" /></span>
+        <div class="tipright">
+      <br/>
+        <p>红色提示为关键信息,请填写完整,不能空!</p>
+       
+        </div>
+        </div>
+        
+        <div class="tipbtn">
+        <input name="" type="button"  class="sure" value="确定" />&nbsp;
+        </div>
+        
+        
+    
+    </div>
+    
+    
    <H6>在线充值</H6>
 <DIV class=content>
 <!--FORM onsubmit="return check()" method=post name=alipayment action=alipay/alipayapi.php target=_blank-->
@@ -21,20 +81,20 @@
   <TR>
     <TD bgColor=#ffffff height=30>
       <DIV align=center>充　　值</DIV></TD>
-    <TD bgColor=#ffffff align=left><IMG src="../images/zfb.jpg" width=256 
+    <TD bgColor=#ffffff align=left><IMG src="images/zfb.jpg" width=256 
       height=57></TD></TR>
   <TR>
     <TD bgColor=#ffffff height=30 width="12%">
       <DIV align=center>
       <DIV align=center>账　　号</DIV></DIV></TD>
-    <TD bgColor=#ffffff width="88%" align=left>&nbsp;&nbsp;<?php echo $_COOKIE["AdminUser"];?></TD></TR>
+    <TD bgColor=#ffffff width="88%" align=left>&nbsp;&nbsp;${AdminUser}</TD></TR>
   <TR>
     <TD bgColor=#ffffff height=30>
       <DIV align=center>充值金额</DIV></TD>
-    <TD bgColor=#ffffff align=left>&nbsp; <INPUT style="WIDTH: 80px" id="money" lang=require class=txt size=40 name="money"> 元 <INPUT value="<?php echo $_COOKIE["AdminUser"];?>" type="hidden" name="AdminUser"></TD></TR>
+    <TD bgColor=#ffffff align=left>&nbsp; <INPUT style="WIDTH: 80px" id="money" lang=require class=txt size=40 name="money"> 元 <INPUT value="${AdminUser}" type="hidden" name="AdminUser"></TD></TR>
   <TR>
     <TD bgColor=#ffffff height=30>&nbsp;</TD>
-    <TD bgColor=#ffffff align=left>　<INPUT style="WIDTH: 60px; HEIGHT: 25px" id=button value=" 提 交 " type=submit name=button></TD></TR></TBODY></TABLE></FORM>
+    <TD bgColor=#ffffff align=left>　<INPUT style="WIDTH: 100px; " id=button value=" 提 交 " type=submit name=button  class="loginbtn"></TD></TR></TBODY></TABLE></FORM>
 <DIV class="bk20 hr"></DIV>
 <DIV class=wycz_zh>
 <TABLE width="100%" style="font-size:13px">
@@ -46,23 +106,54 @@
     <TH width="17%">账户</TH>
     <TH width="30%">帐号</TH>
     <TH width="40%">开户行</TH></TR>
-<?php
-$sql="select * from bank_info order by ID asc";
-$result=mysql_db_query($dbname,$sql);
-	while($rs=mysql_fetch_array($result))
-	{
-?>
-  <TR>
-    <TD><IMG src="<?php echo $rs["propic"];?>"></TD>
-    <TD><?php echo $rs["name"];?></TD>
-    <TD><?php echo $rs["accnumber"];?></TD>
-    <TD><?php echo $rs["bankname"];?></TD></TR>
-<?php
-	}
-?>
+	<#list beans as bean>
+  <TR align="center">
+    <TD ><IMG src="${base}/images/${bean.propic}" height="28px"></TD>
+    <TD>${bean.name}</TD>
+    <TD>${bean.accnumber}</TD>
+    <TD>${bean.bankname}</TD></TR>
+    
+    </#list>
+
   <TR>
     <TH id=kaihu_sm colSpan=4>如需开票，需要额外加收8%的税点。</TH></TR></TBODY></TABLE></DIV></DIV></DIV>
 <DIV class="bk20 hr"></DIV></DIV><IFRAME id=main height=0 src="about:blank" 
 frameBorder=0 width=0 name=main></IFRAME>
+<SCRIPT type=text/javascript>
+
+function hello (){
+
+ $(".tip").fadeIn(200);
+
+ 
+}
+
+
+function check()
+    {
+   
+        var flg = true;
+		var flg1= true;
+        $("input[lang='require']").each(function(){
+			$(this).css("border-color","#ffffff"); 
+		
+            if($(this).val() == "") {
+                flg = false;   
+                	
+				$(this).css("border-color","#FF0000");            
+            }        
+        })
+		 
+		if(flg==false)
+		{
+	 	    hello();
+			return false;   
+			
+		}
+		
+        return true;
+    }  
+
+</SCRIPT>			
   </body>
 </html>

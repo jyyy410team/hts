@@ -12,6 +12,36 @@ include("../include/config.php");
 <SCRIPT language=javascript type=text/javascript src="../images/jquery.min.js"></SCRIPT>
 <SCRIPT language=javascript type=text/javascript src="../images/styleswitch.js"></SCRIPT>
 
+<script type="text/javascript">
+
+$(document).ready(function(){
+  $(".click").click(function(){
+  $(".tip").fadeIn(200);
+  });
+  
+
+  $(".sure").click(function(){
+  $(".tip").fadeOut(100);
+});
+
+  $(".cancel").click(function(){
+  $(".tip").fadeOut(100);
+});
+
+});
+
+function hello (){
+ $(".sure").click(function(){
+  $(".tip").fadeOut(100);
+});
+
+  $(".cancel").click(function(){
+  $(".tip").fadeOut(100);
+});
+}
+</script>
+
+
 <META name=GENERATOR content="MSHTML 8.00.6001.19394">
 </HEAD>
 <BODY>
@@ -120,5 +150,25 @@ function check()
     }  
 
 </SCRIPT>
+
+
+ <div class="tip">
+    	<div class="tiptop"><span>提示信息</span><a></a></div>
+        
+      <div class="tipinfo">
+        <span><img src="images/ticon.png" /></span>
+        <div class="tipright">
+        <p>是否确认对信息的修改 ？</p>
+        <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+        </div>
+        </div>
+        
+        <div class="tipbtn">
+        <input name="" type="button"  class="sure" value="确定" />&nbsp;
+        <input name="" type="button"  class="cancel" value="取消" />
+        </div>
+    
+    </div>
+
 </BODY>
 </HTML>
