@@ -165,7 +165,17 @@ public class LoginAction {
 			return "index";
 		} else {
 			
+			
 		}
+		
+		
+		//需要写的代码
+		String VipUser=userVo.getUserName();
+		String VipPass=userVo.getPassWord();
+		
+		
+		
+		
 
 		return "main";
 	}
