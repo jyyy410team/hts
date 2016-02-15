@@ -1,0 +1,3 @@
+1.系统开始的时候，读取配置文件web.xml,根据配置，从index.jsp页面开始，跳转进入web-inf/下面的  index.html，就是系统的初始化登录首页
+2.系统模块的html，全部放在web-inf/info/   下面
+3.系统css,js,images图片资源文件，全部放在webroot对应的css,js,images文件夹下面

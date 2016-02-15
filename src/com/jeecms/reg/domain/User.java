@@ -35,7 +35,7 @@ public class User {
 
 	private String weburl;
 	/**
-	 * 会员类型 1  2加盟合作用户 3企业用户
+	 * 会员类型 1 管理员   ， 2加盟合作用户，      3企业用户
 	 */
 	private Integer flag;
 

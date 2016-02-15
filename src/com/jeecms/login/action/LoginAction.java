@@ -18,10 +18,10 @@ public class LoginAction {
 	@Autowired
 	LoginService loginService;
 
-	@RequestMapping(value = "/login")
+	@RequestMapping(value = "/index")
 	public String loginView(HttpServletRequest request,
 			HttpServletResponse response, ModelMap model) {
-		return "login";// 跳到登录界面
+		return "index";// 跳到登录界面
 	}
 
 	@RequestMapping(value = "/top")
@@ -36,10 +36,10 @@ public class LoginAction {
 		return "left";// 跳到登录界面
 	}
 
-	@RequestMapping(value = "/index")
+	@RequestMapping(value = "/index2")
 	public String indexView(HttpServletRequest request,
 			HttpServletResponse response, ModelMap model) {
-		return "index";// 跳到登录界面
+		return "index2";// 跳到登录界面
 	}
 
 	@RequestMapping(value = "/footer")
@@ -51,10 +51,10 @@ public class LoginAction {
 	@RequestMapping(value = "/loginOut")
 	public String loginOut(HttpServletRequest request,
 			HttpServletResponse response, ModelMap model) {
-		return "login";// 跳到登录界面
+		return "index";// 跳到登录界面
 	}
 
-	@RequestMapping(value = "/login2")
+	@RequestMapping(value = "/login")
 	public String login(HttpServletRequest request,
 			HttpServletResponse response, ModelMap model, LoginUserVo user) {
 		String code = (String) request.getSession().getAttribute(
@@ -69,7 +69,14 @@ public class LoginAction {
 			
 		}
 
-		return "login";
+		return "index";
 	}
+	
+	/*@RequestMapping(value = "/error")
+	public String error(HttpServletRequest request,
+			HttpServletResponse response, ModelMap model) {
+		request.get
+		return "error";// 跳到登录界面
+	}*/
 
 }
