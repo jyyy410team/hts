@@ -11,4 +11,6 @@ public class BaseDao extends HibernateDaoSupport {
 
 		super.setSessionFactory(sessionFactory);
 	}
+	
+	public String hqlStr="";
 }

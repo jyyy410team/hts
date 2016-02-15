@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import com.jeecms.cms.dao.LoginDao;
 import com.jeecms.cms.dao.Pager;
 import com.jeecms.cms.domain.CmsRole;
+import com.jeecms.reg.domain.AdminUser;
+import com.jeecms.reg.domain.User;
 
 @Service
 /**
@@ -42,5 +44,14 @@ public class LoginService {
 	public LoginDao getLoginDao() {
 		return loginDao;
 	}
+
+	public User getUserByName(String userName) {
+		return loginDao.getUserByName(userName);		
+	}
+
+	public AdminUser getAdminUserByName(String userName) {
+		// TODO Auto-generated method stub
+		return loginDao.getAdminUserByName(userName);	
+				}
 
 }

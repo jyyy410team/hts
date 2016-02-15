@@ -8,6 +8,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.jeecms.cms.domain.CmsRole;
+import com.jeecms.reg.domain.AdminUser;
+import com.jeecms.reg.domain.User;
 
 @Repository
 public class LoginDao extends BaseDao {
@@ -60,5 +62,18 @@ public class LoginDao extends BaseDao {
 		session.createCriteria(CmsRole.class).add(Restrictions.gt("", "a"))
 				.list();
 	}
-//
+
+	//
+
+	public User getUserByName(String userName) {
+		hqlStr = " from User where VipUser='"+userName+"'";
+		User user = (User) getSession().createQuery(hqlStr).uniqueResult();
+		return user;
+	}
+
+	public AdminUser getAdminUserByName(String userName) {
+		hqlStr = " FROM AdminUser where AdminUser='"+userName+"'";
+		 this.getSession().createQuery(hqlStr);
+		return new AdminUser();		
+	}
 }
