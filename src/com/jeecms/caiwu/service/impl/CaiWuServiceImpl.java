@@ -16,7 +16,7 @@ public class CaiWuServiceImpl   extends BaseServiceImpl implements ICaiWuService
 	public <T> Page getPageList(Class<T> class1, int pageSize, int pageNo,
 			boolean isOrderBydesc, String whereStr) {
 		// TODO Auto-generated method stub
-		return caiWuDao.getPageList(class1, pageSize, pageNo,  isOrderBydesc, " vipUser='"+"g"+"'");
+		return caiWuDao.getPageList(class1, pageSize, pageNo,  isOrderBydesc, whereStr);
 	}
 
 	
