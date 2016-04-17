@@ -12,4 +12,8 @@ public interface IBaseService {
 	public <T> Object getBeanById(Class<T> class1, int id);
 	
 	public <T> void delete(Class<T> t,String id);
+	
+	public <T> Object queryBeanBySth(Class<T> class1,String whereSth);
+	
+	public void saveBean(Object object);
 }

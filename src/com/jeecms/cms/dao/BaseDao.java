@@ -9,6 +9,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.jeecms.core.Page;
+import com.jeecms.reg.domain.User;
 @Repository
 public class BaseDao extends HibernateDaoSupport {
 	@Autowired
@@ -65,6 +66,12 @@ public class BaseDao extends HibernateDaoSupport {
 		
 	}
 	
+	public <T> Object queryBeanBySth(Class<T> class1,String whereSth) {
+		hql=" from "+class1.getName()+" where 1=1 "+whereSth;
+		Object bean =  getSession().createQuery(" from com.jeecms.reg.domain.AdminUser where 1=1  and adminUser='admin'").uniqueResult();
+		return bean;
+	}
+	
 	public <T> List<T> getList(Class<T> class1) {
 		List<T> list=this.getHibernateTemplate().loadAll(class1);
 		return list;
@@ -75,6 +82,10 @@ public class BaseDao extends HibernateDaoSupport {
 		
 		this.getHibernateTemplate().delete(this.getSession().get(t, Integer.parseInt(id)));
 		
+	}
+	
+	public   void saveBean(Object object) {
+		this.getHibernateTemplate().save(object);
 	}
 	
 }

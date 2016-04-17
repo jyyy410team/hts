@@ -27,7 +27,7 @@
 	<H6>在线充值 </H6>
 <DIV class=content>
 <!--FORM onsubmit="return check()" method=post name=alipayment action=alipay/alipayapi.php target=_blank-->
-<FORM onsubmit="return check()" method=post name=alipayment action="savechongzhi.php">
+<FORM onsubmit="return check()" method=post name=alipayment action="saveChongZhi.do">
 <TABLE cellSpacing=1 cellPadding=5 width="100%" bgColor=#e2e2e2 style="font-size:13px">
   <TBODY>
   <TR>
@@ -82,10 +82,8 @@ function check()
 		var flg1= true;
         $("input[lang='require']").each(function(){
 			$(this).css("border-color","#ffffff"); 
-		
             if($(this).val() == "") {
                 flg = false;   
-                	
 				$(this).css("border-color","#FF0000");            
             }        
         })

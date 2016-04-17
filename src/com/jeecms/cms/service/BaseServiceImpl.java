@@ -34,6 +34,15 @@ public class BaseServiceImpl implements IBaseService{
 		 baseDao.delete(t, id);
 		
 	}
+	public <T> Object queryBeanBySth(Class<T> class1, String whereSth) {
+		// TODO Auto-generated method stub
+		return baseDao.queryBeanBySth(class1, whereSth);
+	}
+	public void saveBean(Object object) {
+		// TODO Auto-generated method stub
+		baseDao.saveBean(object);
+	}
+	
 
 	
 
