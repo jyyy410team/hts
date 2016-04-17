@@ -12,7 +12,6 @@ import com.jeecms.caiwu.domain.CaiWu;
 import com.jeecms.caiwu.service.iface.ICaiWuService;
 import com.jeecms.core.CmsConstants;
 import com.jeecms.core.Page;
-import com.jeecms.reg.domain.User;
 import com.jeecms.until.CookiesUtils;
 /**
  * 财务
@@ -46,7 +45,6 @@ public String delete(HttpServletRequest request,HttpServletResponse response, Mo
 	for (String id : deleteIds) {
 		caiWuService.delete(CaiWu.class, id);
 	}
-	
 	return "redirect:../caiwu.do";
 	
 }
