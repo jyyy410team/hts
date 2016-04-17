@@ -39,7 +39,14 @@ ICaiWuService caiWuService;
 		return "admin/caiwu";
 	}
 
-
+/**
+ * 批量删除
+ * @param request
+ * @param response
+ * @param model
+ * @param deleteIds
+ * @return
+ */
 @RequestMapping(value = "/caiwu/delete")
 public String delete(HttpServletRequest request,HttpServletResponse response, Model model,String[] deleteIds) {
 	for (String id : deleteIds) {
