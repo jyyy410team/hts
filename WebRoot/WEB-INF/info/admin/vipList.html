@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<base href="${base}/" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+	function checkAll(allCheckBox) {
+		var ids = document.getElementsByName("deleteIds")
+		for (i = 0; i <= ids.length; i++)
+			ids[i].checked = allCheckBox.checked
+	}
+</script>
+
+
+
+
+</head>
+
+
+<body>
+	<form action="vipinfo/delete.do">
+		<div class="place">
+			<span>位置：</span>
+			<ul class="placeul">
+				<li><a href="#">首页</a>
+				</li>
+				<li><a href="#">数据表</a>
+				</li>
+				<li><a href="#">基本内容</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="rightinfo">
+
+			<div class="tools">
+
+				<ul class="toolbar">
+					<li class="click"><span><img src="images/t01.png" />
+					</span>添加</li>
+					<li class="click"><span><img src="images/t02.png" />
+					</span>修改</li>
+					<li>
+						<!-- <span><img src="images/t03.png" /></span> -->
+						<input type="submit" value="删除"
+						style="background-image: images/t03.png" />
+					</li>
+					<li><span><img src="images/t04.png" />
+					</span>统计</li>
+				</ul>
+
+
+				<ul class="toolbar1">
+					<li><span><img src="images/t05.png" />
+					</span>设置</li>
+				</ul>
+
+			</div>
+
+
+			<table class="tablelist">
+				<thead>
+					<tr>
+						<th>序号<i class="sort"><img src="images/px.gif" />
+						</i>
+						</th>
+						<th>会员名称</th>
+						<th>会员类型</th>
+						<th>注册时间</th>
+						<th>账号余额</th>
+						<th>操作</th>
+						<th>选择<input name="checkBoxAll" type="checkbox" value=""
+							checked="checked" onclick="checkAll(this)" />
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<#list page.list as bean>
+					<tr>
+						<td>${page.current_page}-${bean_index+1}</td>
+						<td>${bean.vipUser}</td>
+						<td><#if bean.flag == 1> 核心代理 <#elseif bean.flag == 2>
+							合作加盟供应商 <#else> 企业用户 </#if></td>
+						<td>${bean.regtime}</td>
+						<td>${bean.yue}</td>
+						<td><a href="vipinfo.do?id=${bean.ID}" class="tablelink">会员信息</a>
+							<a href="vipcaiwu.do?id=${bean.ID}" class="tablelink"> 财务报表</a> <a
+							href="XXXX.do?id={bean.ID}" class="tablelink"> 修改密码</a> <a
+							href="#" class="tablelink"> 权限</a></td>
+						<td><input name="deleteIds" type="checkbox"
+							value="${bean.ID}" />
+						</td>
+					</tr>
+					</#list>
+
+				</tbody>
+			</table>
+
+
+
+			<@p.page total_count="${page.total_count}"
+			current_page="${page.current_page}" action="${page.action}"
+			total_page="${page.total_page}"/>
+
+
+
+
+
+
+
+		</div>
+	</form>
+	<script type="text/javascript">
+		$('.tablelist tbody tr:odd').addClass('odd');
+	</script>
+
+</body>
+
+</html>
