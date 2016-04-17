@@ -44,10 +44,10 @@ ICaiWuService caiWuService;
 @RequestMapping(value = "/caiwu/delete")
 public String delete(HttpServletRequest request,HttpServletResponse response, Model model,String[] deleteIds) {
 	for (String id : deleteIds) {
-		//caiWuService.delete(CaiWu.class, id);
+		caiWuService.delete(CaiWu.class, id);
 	}
 	
-	return "redirect:caiwu.do";
+	return "redirect:../caiwu.do";
 	
 }
 
