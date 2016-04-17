@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jeecms.cms.dao.Pager;
 import com.jeecms.cms.domain.CmsRole;
 import com.jeecms.login.service.LoginService;
 
@@ -53,10 +52,10 @@ public class StudentAction {
 			Model model,
 			@RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
 			@RequestParam(value = "numPerPage", required = false, defaultValue = "20") Integer numPerPage) {
-		Pager page = loginService.getCmsRoles(numPerPage, pageNum);
+		/*Pager page = loginService.getCmsRoles(numPerPage, pageNum);
 
-		System.out.println(pageNum + numPerPage);
-		model.addAttribute("page", page);
+		System.out.println(pageNum + numPerPage);*/
+//		model.addAttribute("page", page);
 		return "student/studentList";
 	}
 

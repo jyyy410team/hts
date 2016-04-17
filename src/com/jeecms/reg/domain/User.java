@@ -43,9 +43,9 @@ public class User {
 
 	private String regtime;
 
-	private String data;
+	private String data;//时间
 
-	private Double yue;
+	private Double yue;//账户余额
 
 	private Double tyue;
 

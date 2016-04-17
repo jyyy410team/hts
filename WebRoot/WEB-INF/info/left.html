@@ -7,175 +7,186 @@
 <script language="JavaScript" src="js/jquery.js"></script>
 
 <script type="text/javascript">
-$(function(){	
-	//导航切换
-	$(".menuson .header").click(function(){
-		var $parent = $(this).parent();
-		$(".menuson>li.active").not($parent).removeClass("active open").find('.sub-menus').hide();
-		
-		$parent.addClass("active");
-		if(!!$(this).next('.sub-menus').size()){
-			if($parent.hasClass("open")){
-				$parent.removeClass("open").find('.sub-menus').hide();
-			}else{
-				$parent.addClass("open").find('.sub-menus').show();	
+	$(function() {
+		//导航切换
+		$(".menuson .header").click(
+				function() {
+					var $parent = $(this).parent();
+					$(".menuson>li.active").not($parent).removeClass(
+							"active open").find('.sub-menus').hide();
+
+					$parent.addClass("active");
+					if (!!$(this).next('.sub-menus').size()) {
+						if ($parent.hasClass("open")) {
+							$parent.removeClass("open").find('.sub-menus')
+									.hide();
+						} else {
+							$parent.addClass("open").find('.sub-menus').show();
+						}
+
+					}
+				});
+
+		// 三级菜单点击
+		$('.sub-menus li').click(function(e) {
+			$(".sub-menus li.active").removeClass("active")
+			$(this).addClass("active");
+		});
+
+		$('.title').click(function() {
+			var $ul = $(this).next('ul');
+			$('dd').find('.menuson').slideUp();
+			if ($ul.is(':visible')) {
+				$(this).next('.menuson').slideUp();
+			} else {
+				$(this).next('.menuson').slideDown();
 			}
-			
-			
-		}
-	});
-	
-	// 三级菜单点击
-	$('.sub-menus li').click(function(e) {
-        $(".sub-menus li.active").removeClass("active")
-		$(this).addClass("active");
-    });
-	
-	$('.title').click(function(){
-		var $ul = $(this).next('ul');
-		$('dd').find('.menuson').slideUp();
-		if($ul.is(':visible')){
-			$(this).next('.menuson').slideUp();
-		}else{
-			$(this).next('.menuson').slideDown();
-		}
-	});
-})	
+		});
+	})
 </script>
 
 
 </head>
 
 <body style="background:#fff3e1;">
-	<div class="lefttop"><span></span>后台管理</div>
-    
-    <dl class="leftmenu">
-        
-    <dd>
-    <div class="title">
-    <span><img src="images/leftico01.png" /></span>个人管理
-    </div>
-    	<ul class="menuson">
-        
-        <li>
-            <div class="header">
-            <cite></cite>
-            <a href="chongzhi.do" target="rightFrame">我要充值</a>
-            <i></i>
-            </div>
-           
-        </li>
-        
-        <li>
-            <div class="header">
-            <cite></cite>
-            <a href="right.html" target="rightFrame">财务报表</a>
-            <i></i>
-            </div>                
-            
-        </li>
-        
-         <li>
-            <div class="header">
-            <cite></cite>
-            <a href="right.html" target="rightFrame">修改密码</a>
-            <i></i>
-            </div>                
-            
-        </li>
-        
-       
-       
-        </ul>    
-    </dd>
-        
-    
-    <dd>
-    <div class="title">
-    <span><img src="images/leftico02.png" /></span>软文管理
-    </div>
-    <ul class="menuson">
-        
-        
-        
-         <li>
-            <div class="header">
-            <cite></cite>
-            <a href="right.html" target="rightFrame">软文发布</a>
-            <i></i>
-            </div>                
-            
-        </li>
-        
-          <li>
-            <div class="header">
-            <cite></cite>
-            <a href="right.html" target="rightFrame">软文列表</a>
-            <i></i>
-            </div>                
-            
-        </li>
-        
-        </ul>     
-    </dd> 
-    
-    
-    <dd><div class="title"><span><img src="images/leftico03.png" /></span>代写管理</div>
-    <ul class="menuson">
-    
-      <li>
-            <div class="header">
-            <cite></cite>
-            <a href="right.html" target="rightFrame">代写发布</a>
-            <i></i>
-            </div>                
-            
-        </li>
-        
-          <li>
-            <div class="header">
-            <cite></cite>
-            <a href="right.html" target="rightFrame">代写列表</a>
-            <i></i>
-            </div>                
-            
-        </li>
-    </ul>    
-    </dd>  
-    
-    
-    <dd><div class="title"><span><img src="images/leftico04.png" /></span>反馈管理</div>
-    <ul class="menuson">
-    
-    
-          <li>
-            <div class="header">
-            <cite></cite>
-            <a href="right.html" target="rightFrame">问题反馈</a>
-            <i></i>
-            </div>                
-            
-        </li>
-        
-        
-        
-          <li>
-            <div class="header">
-            <cite></cite>
-            <a href="right.html" target="rightFrame">反馈列表</a>
-            <i></i>
-            </div>                
-            
-        </li>
-        
-        
-        
-      
-    </ul>
-    
-    </dd>   
-    
-    </dl>
-    
+	<div class="lefttop">
+		<span></span>后台管理
+	</div>
+
+	<dl class="leftmenu">
+
+		<dd>
+			<div class="title">
+				<span><img src="images/leftico01.png" /> </span>个人管理
+			</div>
+			<ul class="menuson">
+
+				<li>
+					<div class="header">
+						<cite></cite> <a href="chongzhi.do" target="rightFrame">我要充值</a> <i></i>
+					</div>
+				</li>
+
+				<li>
+					<div class="header">
+						<cite></cite> <a href="caiwu.do" target="rightFrame">财务报表</a> <i></i>
+					</div>
+				</li>
+
+				<li>
+					<div class="header">
+						<cite></cite> <a href="right.html" target="rightFrame">修改密码</a> <i></i>
+					</div>
+				</li>
+
+<li>
+					<div class="header">
+						<cite></cite> <a href="viplist.do" target="rightFrame">会员列表</a> <i></i>
+					</div>
+				</li>
+
+			</ul>
+		</dd>
+
+
+		<dd>
+			<div class="title">
+				<span><img src="images/leftico02.png" /> </span>软文管理
+			</div>
+			<ul class="menuson">
+
+
+
+				<li>
+					<div class="header">
+						<cite></cite> <a href="right.html" target="rightFrame">软文发布</a> <i></i>
+					</div>
+				</li>
+
+				<li>
+					<div class="header">
+						<cite></cite> <a href="right.html" target="rightFrame">软文列表</a> <i></i>
+					</div>
+				</li>
+
+			</ul>
+		</dd>
+
+
+		<dd>
+			<div class="title">
+				<span><img src="images/leftico03.png" /> </span>代写管理
+			</div>
+			<ul class="menuson">
+
+				<li>
+					<div class="header">
+						<cite></cite> <a href="right.html" target="rightFrame">代写发布</a> <i></i>
+					</div>
+				</li>
+
+				<li>
+					<div class="header">
+						<cite></cite> <a href="right.html" target="rightFrame">代写列表</a> <i></i>
+					</div>
+				</li>
+			</ul>
+		</dd>
+
+
+		<dd>
+			<div class="title">
+				<span><img src="images/leftico04.png" /> </span>反馈管理
+			</div>
+			<ul class="menuson">
+
+
+				<li>
+					<div class="header">
+						<cite></cite> <a href="right.html" target="rightFrame">问题反馈</a> <i></i>
+					</div></li>
+
+
+
+				<li>
+					<div class="header">
+						<cite></cite> <a href="right.html" target="rightFrame">反馈列表</a> <i></i>
+					</div></li>
+
+
+
+
+			</ul>
+
+		</dd>
+
+		<!-- 这里是测试模块开始 -->
+		<dd>
+			<div class="title">
+				<span><img src="images/leftico04.png" /> </span>代码测试学习模块
+			</div>
+			<ul class="menuson">
+				<li>
+					<div class="header">
+						<cite></cite> <a href="baiduMap.do" target="rightFrame">百度地图</a> <i></i>
+					</div></li>
+				<li>
+					<div class="header">
+						<cite></cite> <a href="right.html" target="rightFrame">测试</a> <i></i>
+					</div>
+				</li>
+				
+				
+				<li>
+					<div class="header">
+						<cite></cite> <a href="baiduMap.do" target="rightFrame">java代码自动生成</a> <i></i>
+					</div>
+				</li>
+			</ul>
+
+		</dd>
+		<!-- 这里是测试模块结束 -->
+	</dl>
+
 </body>
 </html>

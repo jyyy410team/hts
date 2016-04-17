@@ -18,3 +18,4 @@
 
 <#include "self_define_widget.ftl"/>
 <#include "self_define_register_widget.ftl"/>
+<#include "jyy_hello.ftl"/>

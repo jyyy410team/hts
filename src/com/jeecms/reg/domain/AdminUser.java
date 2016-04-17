@@ -9,11 +9,11 @@ import javax.persistence.Table;
 
 /**
  * 
- * @Title: AdminUser.java
- * @Description: TODO(用一句话描述该文件做什么)
- * @author : jinyangyang
- * @date :2016-2-4 上午10:15:19
- * @version V1.0
+* @Title: AdminUser.java 
+* @Description: TODO(用一句话描述该文件做什么) 
+* @author : JinYangY
+* @date :2016-2-16 下午3:51:47 
+* @version V1.0
  */
 @Entity
 @Table(name = "admin")

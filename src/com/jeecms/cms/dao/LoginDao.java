@@ -8,6 +8,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.jeecms.cms.domain.CmsRole;
+import com.jeecms.core.Page;
 import com.jeecms.reg.domain.AdminUser;
 import com.jeecms.reg.domain.User;
 
@@ -66,14 +67,53 @@ public class LoginDao extends BaseDao {
 	//
 
 	public User getUserByName(String userName) {
-		hqlStr = " from User where VipUser='"+userName+"'";
-		User user = (User) getSession().createQuery(hqlStr).uniqueResult();
+		hql = " from User where VipUser='" + userName + "'";
+		User user = (User) getSession().createQuery(hql).uniqueResult();
 		return user;
 	}
 
 	public AdminUser getAdminUserByName(String userName) {
-		hqlStr = " FROM AdminUser where AdminUser='"+userName+"'";
-		 this.getSession().createQuery(hqlStr);
-		return new AdminUser();		
+		hql = "select * FROM Admin where AdminUser='"+userName+"'";
+		AdminUser admin =(AdminUser) this.getSession().createSQLQuery(hql).addEntity(AdminUser.class).uniqueResult();
+		return admin;
 	}
+
+	public User getUserByUserNameAndPass(String username, String userpass) {
+		String hql = "";
+		hql = "from User where VipUser='" + username + "' and VipPass='"
+				+ userpass + "'";
+		User user = (User) this.getSession().createQuery(hql).uniqueResult();
+		return user;
+
+	}
+
+	public AdminUser getAdminUserByUserNameAndPass(String username, String userpass) {
+		/*hql = " from AdminUser where AdminUser='" + username
+				+ "' and AdminPass='" + userpass + "'";
+		hql = " from AdminUser ";
+		AdminUser adminUser = (AdminUser) this.getSession().createSQLQuery(hql);*/
+				
+		return null;
+	}
+
+	public AdminUser findAdminUsers() {
+		hql = " from AdminUser ";
+		AdminUser adminUser = (AdminUser) this.getSession().createQuery(hql)
+				.uniqueResult();
+		
+	
+		return adminUser;
+	}
+	
+	
+	public <T> Object getBeanById(Class<T> class1,int id) {
+		Object bean = this.getHibernateTemplate().get(class1, id);
+		return bean;
+		
+	}
+	
+	public <T> void delete(Class<T> t,String id) {
+	this.getHibernateTemplate().delete(this.getSession().get(t, Integer.parseInt(id)));
+	}
+	
 }

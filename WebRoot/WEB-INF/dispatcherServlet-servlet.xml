@@ -16,7 +16,9 @@
 	<!-- 添加注解驱动 -->
 	<mvc:annotation-driven />
 
-	<!-- <mvc:resources mapping="/hello/**" location="/webeditor/" />    -->
+ <mvc:resources location="/img/" mapping="/images/**"/>   
+ <mvc:resources location="/js/" mapping="/js/**"/>    
+ <mvc:resources location="/css/" mapping="/css/**"/>  
 
 
 	<!-- 定义跳转的文件的前后缀 jsp视图解析器 -->

@@ -2,6 +2,8 @@ package com.jeecms.reg.action;
 
 import javax.servlet.http.HttpServletRequest;
 
+import net.sf.json.JSONObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -36,6 +38,7 @@ public class RegAction {
 			@RequestParam(required = false) String pass2,
 			HttpServletRequest request, ModelMap model) {
 		try {
+			
 			 regService.addUser(user);
 			model.addAttribute("msg", "恭喜您，注册成功！");
 		} catch (Exception e) {
