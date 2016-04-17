@@ -2,6 +2,7 @@ package com.jeecms.cms.dao;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -23,19 +24,28 @@ public class BaseDao extends HibernateDaoSupport {
 	 * @param class1 类.class
 	 * @param pageSize  每页大小
 	 * @param pageNumber  当前页码
+	 * 排序方式
 	 * @param whereStr  查询条件
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public  <T> Page getPageList(Class<T> class1,int pageSize,int pageNumber,String whereStr) {
-		List<T>  list=this.getHibernateTemplate().loadAll(class1);
-		List<T>  list2= this.getSession().createQuery("from "+class1.getName()+whereStr).setFirstResult((pageNumber-1)*pageSize).setMaxResults(pageSize).list();
+
+	public  <T> Page getPageList(Class<T> class1,int pageSize,int pageNo,boolean isOrderByDesc,String whereStr) {
+		String orderbySth="";
+		if (isOrderByDesc) {
+			orderbySth=" order by ID desc";
+		}
+		if (StringUtils.isNotBlank(whereStr)) {
+			whereStr=" and "+whereStr;
+		}
+		List<T>  list=this.getHibernateTemplate().find("from "+class1.getName()+" where 1=1  "+whereStr+orderbySth);
+		List<T>  list2= this.getSession().createQuery("from "+class1.getName()+" where 1=1  "+whereStr+orderbySth).setFirstResult((pageNo-1)*pageSize).setMaxResults(pageSize).list();
 		Page page = new Page();
-		page.setCurrent_page(pageNumber);
+		page.setCurrent_page(pageNo);
 		page.setList(list2);
 		page.setTotal_count(list.size());
 		page.setLast_page(list.size()%pageSize+1);
-		page.setCurrent_page(pageNumber);
+		page.setCurrent_page(pageNo);
 		page.setPage_size(pageSize);
 		int maxPageNum = (int) (page.getTotal_count() % pageSize == 0 ? page.getTotal_count() / pageSize: (page.getTotal_count() / pageSize + 1));// 总页数要判断
 	    page.setTotal_page(maxPageNum);

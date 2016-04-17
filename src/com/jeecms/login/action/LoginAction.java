@@ -278,7 +278,7 @@ public class LoginAction {
 	 */
 	@RequestMapping(value = "/viplist")
 	public String viplistView(HttpServletRequest request,HttpServletResponse response, Model model,@RequestParam(defaultValue="1",required=false)int current_page,String[] deleteIds){
-		Page page= loginService.getPageList(User.class, CmsConstants.pageSize, current_page," order by id desc");
+		Page page= loginService.getPageList(User.class, CmsConstants.pageSize, current_page,true,"");
 		page.setAction("viplist.do");
 		page.setCurrent_page(current_page);
 		model.addAttribute("page", page); 

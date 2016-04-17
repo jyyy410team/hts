@@ -83,8 +83,8 @@ public class LoginService {
 		
 	}
 	
-	public <T> Page getPageList(Class<T> class1,int pageSize,int pageNo,String whStr) {
-		Page page= loginDao.getPageList( class1,pageSize,pageNo, whStr);
+	public <T> Page getPageList(Class<T> class1,int pageSize,int pageNo,Boolean istrue,String str) {
+		Page page= loginDao.getPageList( class1,pageSize,pageNo, istrue,str);
 		return page;
 		
 	}

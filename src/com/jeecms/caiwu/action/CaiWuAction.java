@@ -8,24 +8,35 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.jeecms.caiwu.domain.CaiWu;
 import com.jeecms.caiwu.service.iface.ICaiWuService;
 import com.jeecms.core.CmsConstants;
 import com.jeecms.core.Page;
-import com.jeecms.reg.domain.User;
-
+/**
+ * 财务
+ * @author Administrator
+ *
+ */
 @Controller
 @RequestMapping(value = "/")
 public class CaiWuAction {
 @Autowired 
 ICaiWuService caiWuService;
 
-
+/**
+ * 财务列表
+ * @param request
+ * @param response
+ * @param model
+ * @param page
+ * @return
+ */
 @RequestMapping(value = "/caiwu")
-public String caiwuList(HttpServletRequest request,HttpServletResponse response, Model model,Page page){
-	page= caiWuService.getPageList(User.class, CmsConstants.pageSize, page.getCurrent_page(),true);
-	model.addAttribute("page", page); 
-	return "admin/caiwu";
-
-}
+	public String caiwuList(HttpServletRequest request,HttpServletResponse response, Model model,Page page){
+		//page= caiWuService.getPageList(CaiWu.class, CmsConstants.pageSize, page.getCurrent_page(),true);
+		page=caiWuService.getPageList(CaiWu.class, CmsConstants.pageSize, page.getCurrent_page(),true, "");
+		model.addAttribute("page", page); 
+		return "admin/caiwu";
+	}
 
 }

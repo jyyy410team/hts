@@ -16,12 +16,12 @@ public class BaseServiceImpl implements IBaseService{
 		return list;
 		
 	}
-	public <T> Page getPageList(Class<T> class1,int pageSize,int pageNo,boolean istrue) {
-		if (istrue) {
-			Page page= baseDao.getPageList( class1,pageSize,pageNo, " order by id desc ");
+	public <T> Page getPageList(Class<T> class1,int pageSize,int pageNo,boolean isOrderByDesc,String whereStr) {
+		if (isOrderByDesc) {
+			Page page= baseDao.getPageList( class1,pageSize,pageNo, isOrderByDesc,whereStr);
 			return page;
 		}
-		Page page= baseDao.getPageList( class1,pageSize,pageNo, "");
+		Page page= baseDao.getPageList( class1,pageSize,pageNo, false,whereStr);
 		return page;
 		
 	}
