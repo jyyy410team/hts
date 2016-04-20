@@ -43,6 +43,14 @@ public class BaseServiceImpl implements IBaseService{
 		baseDao.saveBean(object);
 	}
 	
+	
+	public <T> void updateBean(Object object) {
+		baseDao.updateBean(object);
+		
+		// TODO Auto-generated method stub
+		
+	}
+	
 
 	
 

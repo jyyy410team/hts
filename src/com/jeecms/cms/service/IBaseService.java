@@ -16,4 +16,6 @@ public interface IBaseService {
 	public <T> Object queryBeanBySth(Class<T> class1,String whereSth);
 	
 	public void saveBean(Object object);
+	
+	public <T> void updateBean(Object object) ;
 }

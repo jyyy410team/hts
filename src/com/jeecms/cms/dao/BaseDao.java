@@ -79,13 +79,17 @@ public class BaseDao extends HibernateDaoSupport {
 	}
 	
 	public <T> void delete(Class<T> t, String id) {
-		
 		this.getHibernateTemplate().delete(this.getSession().get(t, Integer.parseInt(id)));
 		
 	}
 	
 	public   void saveBean(Object object) {
 		this.getHibernateTemplate().save(object);
+		
+	}
+	
+	public <T> void updateBean(Object object) {
+        this.getHibernateTemplate().update(object);
 	}
 	
 }

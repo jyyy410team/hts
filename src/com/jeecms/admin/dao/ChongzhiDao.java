@@ -18,4 +18,8 @@ public class ChongzhiDao extends BaseDao {
 		System.out.println(list.size());
 		return list;
 	}
+
+	public <T> void updateBean(Object object) {
+        this.getHibernateTemplate().update(object);
+	}
 }
