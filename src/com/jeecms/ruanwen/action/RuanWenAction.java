@@ -8,13 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import tempVo.Ruanwen_info;
-
-
 import com.jeecms.core.CmsConstants;
 import com.jeecms.core.Page;
+import com.jeecms.ruanwen.domain.Ruanwen_info;
 import com.jeecms.ruanwen.service.Inter.IRuanWenService;
-import com.jeecms.until.CookiesUtils;
 
 /**
  * 软文管理action
