@@ -1,4 +1,5 @@
 
+	
 function alertMsg(msg){
 	var $dialog = $(
 			"<div class='tip' style='display: none'>"+
@@ -54,8 +55,18 @@ function alertMsg(msg){
 
 
 
-$(function(){
-	
-	
-}  
+
+
+
+
 )
+
+
+$(document).ready(function(){
+	$('.tablelist tbody tr:odd').addClass('odd');
+
+})
+
+
+
+

@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>软文发布</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+</head>
+<body>
+<form action=""></form>
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">软文发布</a></li>
+    <li><a href="#">软文发布</a></li>
+    </ul>
+    </div>
+    <div class="rightinfo">
+               <div class="itab">
+					<ul>
+						<li><a href="#tab1" class="selected">软文发布</a></li>
+					</ul>
+				</div>
+             <div id="tab1" class="tabson">
+					<ul class="forminfo">
+						<li><label>会员名称：</label><label>${bean.vipUser}</label></li>
+						<li><label>注册时间：</label><label style="width:300px">${bean.regtime}</label></li>
+						<li><label>会员类型： </label> <label> <#if bean.flag == 1> 
+                <label>核心代理</label>
+       <#elseif   bean.flag == 2>
+               <label> 合作加盟供应商</label>
+       <#else>
+               <label>企业用户</label>
+        </#if></li>
+						<li><label>账号余额： </label><label>${bean.yue}</label></li>
+						<li><label>腾 讯 QQ：<b>*</b> </label><input name="qq" type="text" class="dfinput" value="${bean.qq}" /></li>
+						<li><label>联系电话：<b>*</b> </label><input name="dianhua" type="text" class="dfinput" value="${bean.dianhua}" /></li>
+						<li><label>个人网站：<b>*</b> </label><input name="weburl" type="text" class="dfinput" value="${bean.weburl}" /></li>
+						<li><label>联系邮箱：<b>*</b> </label><input name="myemail" type="text" class="dfinput" value="${bean.myemail}" /></li>
+						<li><label>个人头像：<b>*</b> </label><input name="headpic" type="text" class="dfinput" value="${bean.headpic}" /></li>
+						
+						<li>   <input name="" type="submit" class="loginbtn" value="提交" style="margin-left: 86px"/></li>
+					</ul>
+
+				</div>
+   
+
+    </div>
+    
+   
+
+</body>
+
+</html>

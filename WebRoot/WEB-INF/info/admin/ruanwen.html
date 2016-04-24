@@ -5,6 +5,7 @@
 <title>软文列表</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/j_dialog.js"></script>
 <script type="text/javascript">
 	function checkAll(allCheckBox) {
 		var ids = document.getElementsByName("deleteIds")
@@ -23,7 +24,7 @@
 	<div class="place">
     <span>位置：</span>
     <ul class="placeul">
-    <li><a href="#">首页</a></li>
+    <li><a href="#" >首页</a></li>
     <li><a href="#">软文列表</a></li>
     <li><a href="#">软文列表</a></li>
     </ul>
@@ -48,39 +49,34 @@
     <table class="tablelist">
     	<thead>
     	<tr>
-        <th>序号<i class="sort"><img src="images/px.gif" /></i></th>
-        <th>订单号</th>
-        <th>交易时间</th>
-        <th>交易类型</th>
-        <th>交易金额（元)</th>
-        <th>交易状态</th>
-        <th>选择<input name="checkBoxAll" type="checkbox" value=""
-							checked="checked" onclick="checkAll(this)" />
-						</th>
+        <th>订单ID<i class="sort"><img src="images/px.gif" /></i></th>
+        <th>文章标题</th>
+        <th>发布网址</th>
+        <th>发布网站</th>
+        <th>费用(元)</th>
+        <th>发布状态</th>
+        <th>发布时间<input name="checkBoxAll" type="checkbox"  checked="checked" onclick="checkAll(this)" /></th>
+         <th>管理操作</th>
         </tr>
         </thead>
         <tbody>
         <#list page.list as bean>
         <tr>
         <td>${page.current_page}-${bean_index+1}</td>
-        <td>${bean.order_id}</td>
+       <!--  <td>${bean.order_id}</td> -->
       
-        <td> ${bean.data}</td>
-        <td> ${bean.leixing}</td>
+        <td> ${bean.title}</td>
+        <td> ${bean.weburl}</td>
         
-              <td> ${bean.jine}</td>
+              <td> ${bean.price}</td>
+           <td> ${bean.medianame}</td>
+         	<td><#if bean.flag == 0> 未处理
+         	     <#elseif bean.flag == 1>处理中
+			     <#elseif bean.flag == 2>已发布
+				<#elseif bean.flag == 3>已拒稿
+							 <#else>已修改</#if></td>
         
-         	<td><#if bean.flag == 0> 未充值
-         	 <#elseif bean.flag == 1>已充值
-					 <#elseif bean.flag == 2>未扣款
-					  <#elseif bean.flag == 3>已扣款
-					   <#elseif bean.flag == 4>未退款
-					    <#elseif bean.flag == 5>已退款
-					     <#elseif bean.flag == 6>已付款	
-							 <#else></#if></td>
-        
-        
-        
+         <td> ${bean.fbtime}</td>
         <td><input name="deleteIds" type="checkbox" value="${bean.ID}" /></td>
         </tr> 
         </#list>
@@ -90,7 +86,7 @@
     
    
 
-    <@p.page total_count="${page.total_count}"  current_page="${page.current_page}" action="caiwu.do"   total_page="${page.total_page}"/>
+    <@p.page total_count="${page.total_count}"  current_page="${page.current_page}" action="ruanwenList.do"   total_page="${page.total_page}"/>
     
         
 		  
