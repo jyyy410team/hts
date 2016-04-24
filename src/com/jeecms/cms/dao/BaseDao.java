@@ -9,7 +9,6 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.jeecms.core.Page;
-import com.jeecms.reg.domain.User;
 @Repository
 public class BaseDao extends HibernateDaoSupport {
 	@Autowired

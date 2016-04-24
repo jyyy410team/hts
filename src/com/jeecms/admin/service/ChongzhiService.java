@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.jeecms.admin.dao.ChongzhiDao;
 import com.jeecms.admin.domain.BankInfo;
 import com.jeecms.cms.service.BaseServiceImpl;
-import com.jeecms.reg.domain.AdminUser;
 @Service
 public class ChongzhiService extends BaseServiceImpl implements IChongZhi{
 	@Autowired
