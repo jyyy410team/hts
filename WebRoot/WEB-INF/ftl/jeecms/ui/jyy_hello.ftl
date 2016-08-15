@@ -1,9 +1,9 @@
 
-<#macro page total_count current_page action total_page>
+<#macro page total_count current_page action total_page page_size>
 
 <div class="pagin" >
 
-    	<div class="message">共<i class="blue">${total_count}</i>条记录，当前显示第&nbsp;<i class="blue">${current_page} &nbsp;</i>页</div>
+    	<div class="message">每页显示${page_size}条记录,共<i class="blue">${total_count}</i>条记录，当前显示第&nbsp;<i class="blue">${current_page} &nbsp;</i>页</div>
         <ul class="paginList">
 				    <li class="paginItem"><a href="${action}?current_page=1">首页</a></li>
 				    <li class="paginItem"><a href="${action}?current_page=${current_page?number-1}">上页</a></li>

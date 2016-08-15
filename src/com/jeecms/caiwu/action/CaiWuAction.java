@@ -34,7 +34,7 @@ ICaiWuService caiWuService;
  */
 @RequestMapping(value = "/caiwu")
 	public String caiwuList(HttpServletRequest request,HttpServletResponse response, Model model,Page page){
-		page=caiWuService.getPageList(CaiWu.class, CmsConstants.pageSize, page.getCurrent_page(),true, " vipUser='"+CookiesUtils.getCookieValueByName(request, "AdminUser")+"'");
+		page=caiWuService.getPageList(CaiWu.class, CmsConstants.pageSize, page.getCurrent_page(),true, "");
 		model.addAttribute("page", page); 
 		return "admin/caiwu";
 	}

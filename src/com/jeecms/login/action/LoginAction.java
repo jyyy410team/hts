@@ -1,7 +1,5 @@
 package com.jeecms.login.action;
 
-import java.util.List;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,7 +41,6 @@ public class LoginAction {
 		String ip = "";
 		String data = "";
 		
-		if (cookies!=null) {
 			for (Cookie cookie : cookies) {
 				if (cookie.getName().equals("VipUser")) {
 					VipUser = cookie.getValue();
@@ -61,7 +58,6 @@ public class LoginAction {
 				}
 
 			}
-		}
 		
 
 		if (StringUtils.isNotBlank(VipUser)) {
@@ -263,7 +259,7 @@ public class LoginAction {
 	}
 	
 	@RequestMapping(value = "/baiduMap")
-	public String login2(HttpServletRequest request,HttpServletResponse response, Model model){
+	public String baiduMap(HttpServletRequest request,HttpServletResponse response, Model model){
 				return "test/baiduMap";
 		
 	}
