@@ -114,13 +114,14 @@ public class LoginAction {
 			}
 		} else {
 			ufalg = 0;
+			userpath="index";
 		}
 
 		
 		model.addAttribute("ufalg", ufalg);
 		Cookie cookie1 = new Cookie("AdminUser", VipUser);
 		response.addCookie(cookie1);
-		return "index";// 跳到原来登录界面
+		return userpath;// 跳到原来登录界面
 	}
 
 	@RequestMapping(value = "/top")
