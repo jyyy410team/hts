@@ -109,15 +109,15 @@ public class LoginAction {
 			}
 		} else {
 			ufalg = 0;
-			
-		}
+
+			userpath="index";		}
 
 		
 		//Cookie cookie1 = new Cookie("AdminUser", VipUser);
 		//response.addCookie(cookie1);
 		model.addAttribute("ufalg",ufalg);
 		model.addAttribute("msg", "");
-		return "index";// 跳到原来登录界面
+		return userpath;// 跳到原来登录界面
 	}
 
 	@RequestMapping(value = "/top")

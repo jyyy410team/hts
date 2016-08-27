@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<base href="${base}/" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/j_dialog.js"></script>
+<script type="text/javascript">
+	function checkAll(allCheckBox) {
+		var ids = document.getElementsByName("deleteIds")
+		for (i = 0; i <= ids.length; i++)
+			ids[i].checked = allCheckBox.checked
+	}
+</script>
+
+
+
+
+</head>
+
+
+<body>
+	<form action="vipinfo/delete.do">
+		<div class="place">
+			<span>位置${Request[AdminUser]}：</span>
+			<ul class="placeul">
+				<li>
+					<a href="#">首页</a>
+				</li>
+				<li>
+					<a href="#">代写</a>
+				</li>
+				<li>
+					<a href="#">代写列表</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="rightinfo">
+
+
+
+			<table class="tablelist">
+				<thead>
+					<tr>
+						<th>
+							序号
+							<i class="sort">
+								<img src="images/px.gif" />
+							</i>
+						</th>
+						<th>会员名称</th>
+						<th>代写标题</th>
+						<th>代写篇数</th>
+						<th>价格</th>
+						<th>创建时间</th>
+						<th>当前状态</th>
+						<th>管理操作</th>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<#list page.list as bean>
+					<tr>
+						<td>${page.current_page}-${bean_index+1}</td>
+						<td>${bean.vipUser}</td>
+						<td style="text-align: left">
+							<a href="dsinfo.do?ID=${bean.ID}" target="_blank" class="tablelink">${bean.title}
+						</td>
+						<td>${bean.pianshu}</td>
+						<td>${bean.price}元</td>
+						<td>${bean.data}</td>
+						<td>
+							<#if bean.flag == 0 && bean.dyn==0>
+							<b style='color:#2a8104'>未处理</b>
+							<#elseif bean.flag == 0 && bean.dyn==1>
+							<b style='color:#000000'>已删单（已退款）</b>
+							<#elseif bean.flag == 1>
+							<b style='color:#FF0000'>处理中 已反馈</b>
+							<#elseif bean.flag == 2 && bean.dyn==0>
+							<b style='color:#2a8104'>已交稿 已反馈</b>
+							<#elseif bean.flag == 2 && bean.dyn==1>
+							<b style='color:#0000FF'>已确认</b>
+							<#elseif bean.flag == 3 && bean.dyn==0>
+							<b style='color:#FF0000'>已回复 已反馈</b>
+							<#elseif bean.flag == 3 && bean.dyn==1>
+							<b style='color:#0000FF'>已确认</b>
+							<#elseif bean.flag == 4>
+							<b style='color:#FF0000'>处理中 已反馈</b>
+							<#else>
+							<b style='color:#0000FF'>已确认</b>
+							</#if>
+						</td>
+
+
+
+
+						<td>
+							<a href="vipinfo.do?id=${bean.ID}" class="tablelink">会员信息</a>
+							<a href="vipcaiwu.do?id=${bean.ID}" class="tablelink"> 财务报表</a>
+							<a href="XXXX.do?id={bean.ID}" class="tablelink"> 修改密码</a>
+							<a href="#" class="tablelink"> 权限</a>
+							
+							
+							
+							<#if bean.flag == 0 && bean.dyn==0>
+							<a href="../dsinfo.php?ID=>" target="_blank">预览</a> <a href="editdaixie.php?ID=>">收稿</a>
+							<#elseif bean.flag == 0 && bean.dyn==1>
+							<a href="../dsinfo.php?ID=" target="_blank">预览</a>
+							<#elseif bean.flag == 1>
+								<a href="../dsinfo.php?ID=" target="_blank">预览</a> <a href="daixie_ok.php?ID=">交稿</a> <a href="daixie_replay.php?ID=">回复</a>
+							
+								<#elseif bean.flag == 2 && bean.dyn==3>
+							<a href="../dsinfo.php?ID=" target="_blank">预览</a>
+							
+								<#elseif bean.flag == 0 && bean.dyn==4>
+							<a href="../dsinfo.php?ID=" target="_blank">预览</a>
+							 <a href="daixie_ok.php?ID="交稿</a> <a href="daixie_replay.php?ID=">回复</a>
+							<#else>
+							<b style='color:#0000FF'>已确认</b>
+							</#if>
+						</td>
+
+					</tr>
+
+
+
+					</#list>
+
+				</tbody>
+			</table>
+
+
+
+			<@p.page total_count="${page.total_count}"
+			page_size="${page.page_size}" current_page="${page.current_page}"
+			action="${page.action}" total_page="${page.total_page}"/>
+
+
+
+
+
+
+
+		</div>
+	</form>
+	<script type="text/javascript">
+		$('.tablelist tbody tr:odd').addClass('odd');
+	</script>
+
+</body>
+
+</html>
