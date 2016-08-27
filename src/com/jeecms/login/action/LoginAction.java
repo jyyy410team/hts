@@ -18,6 +18,8 @@ import com.jeecms.login.service.LoginService;
 import com.jeecms.login.vo.LoginUserVo;
 import com.jeecms.reg.domain.AdminUser;
 import com.jeecms.reg.domain.User;
+import com.jeecms.until.CookiesUtils;
+import com.jeecms.until.Md5Util;
 
 @Controller
 @RequestMapping(value = "/")
@@ -32,43 +34,32 @@ public class LoginAction {
 
 		int ufalg = -1;// index分两部分，显示首页index的登录界面部分，还是欢迎界面部分
 
-		Cookie[] cookies = request.getCookies();
 		String VipUser = "";
 		String AdminUser = "";
 		String userpath = "";
 		String fg = "";
 		String jiaose = "";
 		String ip = "";
-		String data = "";
+		VipUser=CookiesUtils.getCookieValueByName(request, "VipUser");
+		model.addAttribute( "VipUser", VipUser);
 		
-			for (Cookie cookie : cookies) {
-				if (cookie.getName().equals("VipUser")) {
-					VipUser = cookie.getValue();
-					model.addAttribute(cookie.getName(), cookie.getValue());
-				}
-
-				if (cookie.getName().equals("AdminUser")) {
-					AdminUser = cookie.getValue();
-					model.addAttribute(cookie.getName(), cookie.getValue());
-				}
-
-				if (cookie.getName().equals("fg")) {
-					fg = cookie.getValue();
-					model.addAttribute(cookie.getName(), cookie.getValue());
-				}
-
-			}
+		AdminUser=CookiesUtils.getCookieValueByName(request, "AdminUser");
+		model.addAttribute( "AdminUser", AdminUser);
 		
+		fg=CookiesUtils.getCookieValueByName(request, "fg");
+		model.addAttribute( "fg", fg);
 
 		if (StringUtils.isNotBlank(VipUser)) {
 			User sqlUser = loginService.getUserByName(VipUser);
 			if (sqlUser != null) {
 				userpath = "user/login";
 				ip = request.getRemoteAddr();
-				model.addAttribute("ip", ip);
-
-				data = sqlUser.getData();
-				model.addAttribute("data", data);
+				sqlUser.setIp(ip);
+				model.addAttribute("user", sqlUser);
+				
+				model.addAttribute("ufalg", 1);
+				model.addAttribute("username", VipUser);
+				model.addAttribute("userpath", userpath);
 
 				if (StringUtils.isNotBlank(fg)) {
 					switch (Integer.parseInt(fg)) {
@@ -84,16 +75,20 @@ public class LoginAction {
 
 					}
 				}
+				
+				model.addAttribute("jiaose", jiaose);
 			}
 		} else if (StringUtils.isNotBlank(AdminUser)) {
-			AdminUser sqlUser2 = loginService.getAdminUserByName(AdminUser);
-			if (sqlUser2 != null) {
+			AdminUser adminUser = loginService.getAdminUserByName(AdminUser);
+			if (adminUser != null) {
 				userpath = "admin/login";
 				ip = request.getRemoteAddr();
-				model.addAttribute("ip", ip);
+				adminUser.setIp(ip);
+				model.addAttribute("user", adminUser);
 				
-				data = sqlUser2.getData();
-				model.addAttribute("data", data);
+				model.addAttribute("ufalg", 1);
+				model.addAttribute("username", AdminUser);
+				model.addAttribute("userpath", userpath);
 
 				if (StringUtils.isNotBlank(fg)) {
 					switch (Integer.parseInt(fg)) {
@@ -109,15 +104,19 @@ public class LoginAction {
 
 					}
 				}
+				
+				
 			}
 		} else {
 			ufalg = 0;
+			
 		}
 
 		
-		model.addAttribute("ufalg", ufalg);
-		Cookie cookie1 = new Cookie("AdminUser", VipUser);
-		response.addCookie(cookie1);
+		//Cookie cookie1 = new Cookie("AdminUser", VipUser);
+		//response.addCookie(cookie1);
+		model.addAttribute("ufalg",ufalg);
+		model.addAttribute("msg", "");
 		return "index";// 跳到原来登录界面
 	}
 
@@ -162,22 +161,19 @@ public class LoginAction {
 	 */
 	@RequestMapping(value = "/login")
 	public String login(HttpServletRequest request,
-			HttpServletResponse response, ModelMap model, LoginUserVo userVo) {
+			HttpServletResponse response, ModelMap model, LoginUserVo userParam) {
 		String code = (String) request.getSession().getAttribute(
 				com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
 
-		if (userVo.getYzm().equalsIgnoreCase(code)) {
+		if (userParam.getYzm().equalsIgnoreCase(code)) {
 			model.addAttribute("msg", "验证码错误!");
 			return "index";
-		} else {
-			
-			
-		}
+		}  
 		
 		
 		//需要写的代码
-		String VipUser=userVo.getUserName();
-		String VipPass=userVo.getPassWord();
+		String VipUser=userParam.getUserName();
+		String VipPass=Md5Util.GetMD5Code(userParam.getPassWord());
 		
 		int fg=-1;
 		String ip="";
@@ -186,7 +182,6 @@ public class LoginAction {
 		User user =loginService.getUserByUserNameAndPass(VipUser, VipPass);
 		if (user!=null) {//没有用户，说明用户名密码错误，返回到首页登录页面index,重新登录
 			
-			date=user.getData();
 			
 			Cookie cookie1= new Cookie("ckey", "yes");
 			Cookie cookie2= new Cookie("AdminUser", VipUser);
@@ -225,10 +220,10 @@ public class LoginAction {
 				adminUser =loginService.findAdminUsers();
 				if (adminUser!=null) {
 					model.addAttribute("msg", "用户名密码错误!");//用户名密码错误
-					return "admin/indexs";
+					return "index";
 				}else {
-					if (true) {
-						date=adminUser.getData();
+					String xPassWord=Md5Util.GetMD5Code(Md5Util.GetMD5Code(userParam.getPassWord()));
+					if ("admin123".equals(userParam.getUserName())&&"0192023a7bbd73250516f069df18b500".equals(xPassWord)) {
 						Cookie cookie1= new Cookie("ckey", "yes");
 						Cookie cookie2= new Cookie("AdminUser", VipUser);
 						Cookie cookie3= new Cookie("fg", adminUser.getFlag()+"");
@@ -239,7 +234,7 @@ public class LoginAction {
 						response.addCookie(cookie3);
 						response.addCookie(cookie4);
 						response.addCookie(cookie5);
-						return "admin/indexs";//登录成功
+						return "admin/indexs";//管理员登录成功
 					} else {
 						model.addAttribute("msg", "用户名密码错误!");//用户名密码错误
 						return "admin/indexs";
@@ -254,9 +249,7 @@ public class LoginAction {
 		//return "main";//返回内容页面，进入系统
 	}
 
-	public void addCookies(HttpServletResponse response) {
-		
-	}
+	
 	
 	@RequestMapping(value = "/baiduMap")
 	public String baiduMap(HttpServletRequest request,HttpServletResponse response, Model model){

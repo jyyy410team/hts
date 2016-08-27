@@ -49,7 +49,7 @@ document.getElementById("detail").style.display="block";
     </div>
 
 </div>
-<div id="detail"  style="display: none">  请求地址：${pageContext.errorData.requestURI} <br>
+<div id="detail" >  请求地址：${pageContext.errorData.requestURI} <br>
 
        状态码：  ${pageContext.errorData.statusCode} <br>
 

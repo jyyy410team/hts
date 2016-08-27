@@ -7,11 +7,14 @@ public class CookiesUtils {
 public static String getCookieValueByName(HttpServletRequest request,String cookieName) {
 	String cookieName0="";
 	Cookie[] cookies = request.getCookies();
-	for (Cookie cookie : cookies) {
-		if (cookie.getName().equals(cookieName)) {
-			cookieName0 = cookie.getValue();
+	if (cookies!=null) {
+		for (Cookie cookie : cookies) {
+			if (cookie.getName().equals(cookieName)) {
+				cookieName0 = cookie.getValue();
+			}
 		}
 	}
+	
 	return cookieName0;
 	
 }

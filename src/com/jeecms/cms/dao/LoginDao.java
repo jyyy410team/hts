@@ -88,12 +88,11 @@ public class LoginDao extends BaseDao {
 	}
 
 	public AdminUser getAdminUserByUserNameAndPass(String username, String userpass) {
-		/*hql = " from AdminUser where AdminUser='" + username
-				+ "' and AdminPass='" + userpass + "'";
-		hql = " from AdminUser ";
-		AdminUser adminUser = (AdminUser) this.getSession().createSQLQuery(hql);*/
+		hql = " from AdminUser where adminUser='" + username
+				+ "' and adminPass='" + userpass + "'";
+		AdminUser adminUser = (AdminUser) this.getSession().createQuery(hql).uniqueResult();
 				
-		return null;
+		return adminUser;
 	}
 
 	public AdminUser findAdminUsers() {
