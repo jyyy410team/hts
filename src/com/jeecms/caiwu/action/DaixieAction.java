@@ -2,6 +2,7 @@ package com.jeecms.caiwu.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +13,6 @@ import com.jeecms.caiwu.domain.Daixie_info;
 import com.jeecms.caiwu.service.iface.IDaixieService;
 import com.jeecms.core.CmsConstants;
 import com.jeecms.core.Page;
-import com.jeecms.until.ConfigPageUtil;
 
 /**
  * 
@@ -53,7 +53,7 @@ public class DaixieAction {
 	public String linkTodsinfo(HttpServletRequest request,HttpServletResponse response, Model model,Integer ID) {
 		Daixie_info bean=(Daixie_info) daixieService.getBeanById(Daixie_info.class, ID);
 		model.addAttribute("bean", bean);
-		ConfigPageUtil.initData(model, daixieService);
+		daixieService.initData(model);
 		return "dsinfo";
 	}
 	
@@ -86,6 +86,22 @@ public class DaixieAction {
 		}
 		return "redirect:../daixieList.do";
 
+	}
+	/**
+	 * 保存代写内容
+	 * 描述：
+	 * @靳阳阳
+	 * 2016-8-27
+	@
+	 */
+	@RequestMapping(value = "/saveDaiXie")
+	public String saveDaiXie(HttpServletRequest request,HttpServletResponse response, Model model,Daixie_info formVo,HttpSession session) {
+		//??会员名称  
+		formVo.setData(daixieService.getData());
+		formVo.setOrder_id(daixieService.getOrderId());
+		daixieService.saveBean(formVo);
+		return "admin/daixie_add";
+		
 	}
 
 }

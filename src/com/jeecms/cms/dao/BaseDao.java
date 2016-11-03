@@ -1,5 +1,6 @@
 package com.jeecms.cms.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -38,7 +39,8 @@ public class BaseDao extends HibernateDaoSupport {
 		if (StringUtils.isNotBlank(whereStr)) {
 			whereStr=" and "+whereStr;
 		}
-		List<T>  list=this.getHibernateTemplate().find("from "+class1.getName()+" where 1=1  "+whereStr+orderbySth);
+		//List<T>  list=this.getHibernateTemplate().find("from "+class1.getName()+" where 1=1  "+whereStr+orderbySth);
+		List<T>  list=this.getSession().createQuery("from "+class1.getName()+" where 1=1  "+whereStr+orderbySth).list();
 		List<T>  list2= this.getSession().createQuery("from "+class1.getName()+" where 1=1  "+whereStr+orderbySth).setFirstResult((pageNo-1)*pageSize).setMaxResults(pageSize).list();
 		Page page = new Page();
 		page.setCurrent_page(pageNo);
@@ -83,12 +85,34 @@ public class BaseDao extends HibernateDaoSupport {
 	}
 	
 	public   void saveBean(Object object) {
-		this.getHibernateTemplate().save(object);
+		this.getSession().save(object);
+		//this.getHibernateTemplate().save(object);
 		
 	}
 	
 	public <T> void updateBean(Object object) {
+		//this.getSession().update(object);
         this.getHibernateTemplate().update(object);
+	}
+/**
+ * 1
+ * 描述：
+ * @靳阳阳
+ * 2016-8-27
+@
+ */
+	public Date getSysDateTime() {
+		/*session.createQuery("SELECT CURRENT_DATE() from Person p").list();//获取数据库服务器日期 
+		session.createQuery("SELECT CURRENT_TIME() from Person p").list();//获取数据库服务器time 
+		session.createQuery("SELECT CURRENT_TIMESTAMP() from Person p").list();//timestamp
+		 
+*/		
+	
+			return  (Date) this.getSession().createQuery("SELECT CURRENT_TIMESTAMP() from User user").list().get(0);
+	
+			
+		
+		
 	}
 	
 }

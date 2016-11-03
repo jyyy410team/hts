@@ -3,8 +3,6 @@ package com.jeecms.until;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import sun.security.provider.MD5;
-
 public class Md5Util {
 	 
     // 全局数组

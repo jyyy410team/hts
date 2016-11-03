@@ -1,4 +1,0 @@
-AuthGroupFile /dev/null
-AuthType Basic
-AuthUserFile /home/rspndphm/domains/hts.hongmuchuan.com/.htpasswd/public_html/upload/.htpasswd
-AuthName "nihao"

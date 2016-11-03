@@ -1,32 +1,206 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>daixie_add.html</title>
-	<base href="${base}/" />
-    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-    <meta http-equiv="description" content="this is my page">
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    
-   <script type="text/javascript" src="editor/kindeditor.js"></script>
+<head>
+<title>daixie_add.html</title>
+
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<script type="text/javascript" src="editor/kindeditor.js"></script>
 
 
-  
+
+<link rel="stylesheet"
+	href="bootstrap/vendor/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet"
+	href="${base}/bootstrap/dist/css/bootstrapValidator.css" />
+<script type="text/javascript"
+	src="${base}/bootstrap/vendor/jquery/jquery-1.10.2.min.js"></script>
+<script type="text/javascript"
+	src="${base}/bootstrap/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="${base}/bootstrap/dist/js/bootstrapValidator.js"></script>
+<script type="text/javascript" src="js/j_dialog.js"></script>
+<link href="${base}/css/style.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
 	KE.show({
 		id : 'yaoqiu',
-		cssPath : 'images/index.css'
+		cssPath : '${base}/images/index.css'
 	});
 </script>
 
-  </head>
-  
-  <body>
-  s <textarea id="yaoqiu"  style="width:100%;height:330px;">1、推广对象：&lt;BR /&gt;
-2、文章体裁：&lt;BR /&gt;
-3、文章标题：&lt;BR /&gt;
-4、宣传要点：&lt;BR /&gt;
-5、其他要求：&lt;BR /&gt;
-5、软文案例：&lt;br /&gt;若能提供一篇您认为不错的软文链接给我们，对我们的写作方向很有参考作用，写出的文章也能比较达到您预期的要求。&lt;BR /&gt;</textarea>
-  </body>
+</head>
+
+<body>
+
+
+	<div class="place">
+		<span>位置：</span>
+		<ul class="placeul">
+			<li><a href="#">首页</a>
+			</li>
+			<li><a href="#">代写管理</a>
+			</li>
+			<li><a href="#">代写发布</a>
+			</li>
+		</ul>
+	</div>
+
+
+	<div class="container">
+
+
+		<form id="defaultForm" action="${base}/saveDaiXie.do">
+			<hr>
+			<div class="form-group">
+				<label>标题：</label> <input type="text" class="form-control"
+					placeholder="请输入标题：" name="title" /> <span class="help-block"
+					id="firstNameMessage" />
+			</div>
+			<div class="form-group">
+				<label>内容：</label>
+				<textarea id="yaoqiu" name="content"
+					style="width:100%;height:330px;">
+					    1、推广对象：&lt;BR /&gt;
+						2、文章体裁：&lt;BR /&gt;
+						3、文章标题：&lt;BR /&gt;
+						4、宣传要点：&lt;BR /&gt;
+						5、其他要求：&lt;BR /&gt;
+						5、软文案例：&lt;br /&gt;若能提供一篇您认为不错的软文链接给我们，对我们的写作方向很有参考作用，写出的文章也能比较达到您预期的要求。&lt;BR /&gt;</textarea>
+
+				<span class="help-block" id="contentMessage" />
+			</div>
+
+			<div class="form-group">
+				<label>参考：</label> </br> <label> 1、推广对象：一起飞（<a
+					href="www.yiqifei.com" target="blank">www.yiqifei.com</a>），正文里添加一处网址；<BR>
+					2、文章体裁：采访型/评论型/故事型/自由型（请选择1种），字数1000以上，要求原创；<BR>
+					3、文章标题：含关键词“特价机票”；<BR>4、宣传要点：一起飞机票网，特价机票2折起，可预订全球200个国家机票，方便又实惠；<BR>
+					5、若有其他要求请写清楚详细，不满意可以重新修改。<BR>
+					6、若能提供一篇您认为不错的软文链接给我们，对我们的写作方向很有参考作用，写出的文章也能比较达到您预期的要求。
+					</TD>
+					</TR> </label>
+			</div>
+			<div class="form-group">
+				<label></label> <SELECT id="pianshu" class="form-control" 
+					onchange=setprice(this.value) name="pianshu">
+					<OPTION selected value=0>请选择</OPTION>
+					<OPTION value=1>代写1篇50元</OPTION>
+					<OPTION value=2>代写2篇100元</OPTION>
+					<OPTION value=3>代写3篇150元</OPTION>
+					<OPTION value=4>代写4篇200元</OPTION>
+					<OPTION value=5>代写5篇250元</OPTION>
+					<OPTION value=6>代写6篇300元</OPTION>
+					<OPTION value=7>代写7篇350元</OPTION>
+					<OPTION value=8>代写8篇400元</OPTION>
+					<OPTION value=9>代写9篇450元</OPTION>
+					<OPTION value=10>代写10篇500元</OPTION>
+				</SELECT>
+
+
+			</div>
+
+
+			<div class="form-group">
+
+
+				<INPUT style="COLOR: rgb(255,0,0)" id="jiage" class=txt value=50
+				lang="require"	readOnly size=8 name="jiage"> 元 <SPAN id="ye"></SPAN><INPUT
+					id="yuer" value="${yue}" type="hidden" name="yuer">
+
+			</div>
+
+
+			<div class="form-group">
+				<div>
+					<button type="submit" id="button" class="btn btn-primary">提交代写</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+							$('#defaultForm')
+									.bootstrapValidator(
+											{
+												fields : {
+													title : {
+														container : '#firstNameMessage',
+														validators : {
+															notEmpty : {
+																message : '标题不能为空！'
+															},
+															stringLength : {
+																min : 2,
+																max : 20,
+																message : '（标题字数控制在2-20个汉字以内为宜！）'
+															}
+
+														}
+													},
+													content : {
+														container : 'contentMessage',
+														validators : {
+															notEmpty : {
+																message : 'The last name is required and cannot be empty'
+															}
+														}
+													}
+
+												}
+											});
+						});
+	</script>
+
+	<SCRIPT type=text/javascript>
+		function setprice(val) {
+			$("#jiage").val(val * 50);
+			if ($("#jiage").val() == 0) {
+				$("#ye").html(" ");
+				$("#button").attr("disabled", true);
+			} else if ($("#yuer").val() - 0 < $("#jiage").val() - 0) {
+				$("#ye").html("余额不足请充值.");
+				$("#button").attr("disabled", true);
+			} else {
+				$("#ye").html(" ");
+				$("#button").attr("disabled", false);
+			}
+		}
+
+		function check() {
+			var flg = true;
+			var flg1 = true;
+			
+
+			$("select[id='pianshu']").each(function() {
+				$(this).css("background-color", "#ffffff");
+				if ($(this).val() == "0") {
+					flg1 = false;
+					$(this).css("background-color", "#FF0000");
+				}
+			})
+
+			if (flg == false || flg1 == false) {
+				alert('红色提示为关键信息,请填写完整,不能空!');
+				return false;
+
+			}
+
+			var reg = new RegExp(/^[^*$#\\~@!&%￥<>=|{}+-\/]+$/);
+			if (!reg.test(document.form1.biaoti.value)) {
+				alert("不能输入特殊字符！");
+				document.defaultForm.title.focus();
+				return false;
+			}
+
+			return true;
+		}
+	</SCRIPT>
+
+
+</body>
 </html>

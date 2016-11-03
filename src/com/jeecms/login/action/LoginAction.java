@@ -3,6 +3,7 @@ package com.jeecms.login.action;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.jeecms.cms.domain.SessionUser;
 import com.jeecms.core.CmsConstants;
 import com.jeecms.core.Page;
 import com.jeecms.login.service.LoginService;
@@ -20,49 +23,49 @@ import com.jeecms.reg.domain.AdminUser;
 import com.jeecms.reg.domain.User;
 import com.jeecms.until.CookiesUtils;
 import com.jeecms.until.Md5Util;
-
+/**
+ * 
+ * 描述： 世界上，最可怕的事情就是人老的太快，老去的时候，没有为梦想奋斗过，没有实现愿望，人就死去了。
+ * @靳阳阳
+ * @2016-8-27
+ */
+@SessionAttributes("sessionUser")  
 @Controller
 @RequestMapping(value = "/")
 public class LoginAction {
+	
 	@Autowired
 	LoginService loginService;
 
 	@RequestMapping(value = "/index")
-	public String loginView(HttpServletRequest request,
-			HttpServletResponse response, ModelMap model) {
+	public String loginView(HttpServletRequest request,HttpServletResponse response, Model model,SessionUser sessionUser) {
 		//
+		
+		//数据库用户用户,是否存在的标志
+		Integer ufalg = -1;// index分两部分，显示首页index的登录界面部分，还是欢迎界面部分  //数据库用户用户区是否存在的标志
 
-		int ufalg = -1;// index分两部分，显示首页index的登录界面部分，还是欢迎界面部分
-
-		String VipUser = "";
-		String AdminUser = "";
+		String vipUserName = "";
+		String adminUserName = "";
+		String  username="";
 		String userpath = "";
-		String fg = "";
+		int fg = -1;
 		String jiaose = "";
-		String ip = "";
-		VipUser=CookiesUtils.getCookieValueByName(request, "VipUser");
-		model.addAttribute( "VipUser", VipUser);
+		vipUserName=sessionUser.getVipUser();
+		adminUserName=sessionUser.getAdminUser();
+		fg=sessionUser.getFg();
 		
-		AdminUser=CookiesUtils.getCookieValueByName(request, "AdminUser");
-		model.addAttribute( "AdminUser", AdminUser);
-		
-		fg=CookiesUtils.getCookieValueByName(request, "fg");
-		model.addAttribute( "fg", fg);
 
-		if (StringUtils.isNotBlank(VipUser)) {
-			User sqlUser = loginService.getUserByName(VipUser);
-			if (sqlUser != null) {
-				userpath = "user/login";
-				ip = request.getRemoteAddr();
-				sqlUser.setIp(ip);
-				model.addAttribute("user", sqlUser);
-				
-				model.addAttribute("ufalg", 1);
-				model.addAttribute("username", VipUser);
-				model.addAttribute("userpath", userpath);
+		if (StringUtils.isNotBlank(vipUserName)) {
+			User vipUser = loginService.getUserByName(vipUserName);
+			if (vipUser != null) {
+				userpath = "user/index";//???返回登录界面使用
+				username=vipUserName;
+				ufalg=1;//数据库用户用户区是否存在的标志
+				vipUser.setHeadpic(vipUser.getHeadpic().substring(vipUser.getHeadpic().indexOf("/")));
+				model.addAttribute("user", vipUser);//yue ip data 用user.yue取
 
-				if (StringUtils.isNotBlank(fg)) {
-					switch (Integer.parseInt(fg)) {
+				if (fg!=-1) {//角色区分标志
+					switch (fg) {
 					case 1:
 						jiaose = "核心代理";
 						break;
@@ -76,22 +79,18 @@ public class LoginAction {
 					}
 				}
 				
-				model.addAttribute("jiaose", jiaose);
+			
 			}
-		} else if (StringUtils.isNotBlank(AdminUser)) {
-			AdminUser adminUser = loginService.getAdminUserByName(AdminUser);
+		} else if (StringUtils.isNotBlank(adminUserName)) {
+			AdminUser adminUser = loginService.getAdminUserByName(adminUserName);
 			if (adminUser != null) {
-				userpath = "admin/login";
-				ip = request.getRemoteAddr();
-				adminUser.setIp(ip);
+				userpath = "admin/index.do";//????
+				adminUser.setHeadpic(adminUser.getHeadpic().substring(adminUser.getHeadpic().indexOf("/")));
 				model.addAttribute("user", adminUser);
-				
-				model.addAttribute("ufalg", 1);
-				model.addAttribute("username", AdminUser);
-				model.addAttribute("userpath", userpath);
-
-				if (StringUtils.isNotBlank(fg)) {
-					switch (Integer.parseInt(fg)) {
+				username=adminUserName;
+				ufalg=1;
+				if (fg!=-1) {
+					switch (fg) {
 					case 1:
 						jiaose = "站长";
 						break;
@@ -109,50 +108,47 @@ public class LoginAction {
 			}
 		} else {
 			ufalg = 0;
-
-			userpath="index";		}
-
-		
-		//Cookie cookie1 = new Cookie("AdminUser", VipUser);
-		//response.addCookie(cookie1);
+		}
+		model.addAttribute("userpath", userpath);
 		model.addAttribute("ufalg",ufalg);
-		model.addAttribute("msg", "");
-		return userpath;// 跳到原来登录界面
+		model.addAttribute("VipUser",vipUserName);
+		model.addAttribute("AdminUser",adminUserName);
+		model.addAttribute("fg", fg);
+		model.addAttribute("username", username);
+		model.addAttribute("jiaose", jiaose);
+		loginService.initData(model);//inc是随机数   include ("include/config.php");  web.data 是网站信息
+		return "index";// 跳到原来登录界面
 	}
 
-	@RequestMapping(value = "/top")
-	public String topView(HttpServletRequest request,
-			HttpServletResponse response, ModelMap model) {
-		return "top";// 跳到登录界面
+	@RequestMapping(value = "admin/top")
+	public String topView(HttpServletRequest request,HttpServletResponse response, ModelMap model) {
+		return "admin/top";// 跳到登录界面
 	}
 
-	@RequestMapping(value = "/left")
-	public String leftView(HttpServletRequest request,
-			HttpServletResponse response, ModelMap model) {
-		return "left";// 跳到登录界面
+	@RequestMapping(value = "admin/left")
+	public String leftView(HttpServletRequest request,HttpServletResponse response, ModelMap model) {
+		return "admin/left";// 跳到登录界面
 	}
 
-	@RequestMapping(value = "/index2")
-	public String indexView(HttpServletRequest request,
-			HttpServletResponse response, ModelMap model) {
-		return "index2";// 跳到登录界面
+	@RequestMapping(value = "admin/main")//???干嘛用的
+	public String indexView(HttpServletRequest request,HttpServletResponse response, ModelMap model) {
+		return "admin/main";// 跳到登录界面
 	}
 
-	@RequestMapping(value = "/footer")
-	public String footView(HttpServletRequest request,
-			HttpServletResponse response, ModelMap model) {
-		return "footer";// 跳到登录界面
+	@RequestMapping(value = "admin/footer")
+	public String footView(HttpServletRequest request,HttpServletResponse response, ModelMap model) {
+		return "admin/footer";// 跳到登录界面
 	}
 
 	@RequestMapping(value = "/loginOut")
-	public String loginOut(HttpServletRequest request,
-			HttpServletResponse response, ModelMap model) {
-
+	public String loginOut(HttpServletRequest request,HttpServletResponse response, ModelMap model,HttpSession session,SessionUser sessionUser) {
+			sessionUser=new SessionUser();
+			model.addAttribute("sessionUser", sessionUser);
 		return "index";// 跳到登录界面
 	}
 
 	/**
-	 * 登录方法
+	 * 点击登录的方法
 	 * @param request
 	 * @param response
 	 * @param model
@@ -161,11 +157,10 @@ public class LoginAction {
 	 */
 	@RequestMapping(value = "/login")
 	public String login(HttpServletRequest request,
-			HttpServletResponse response, ModelMap model, LoginUserVo userParam) {
-		String code = (String) request.getSession().getAttribute(
-				com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+			HttpServletResponse response, ModelMap model, LoginUserVo userParam,SessionUser sessionUser) {
+		String code = (String) request.getSession().getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
 
-		if (userParam.getYzm().equalsIgnoreCase(code)) {
+		if (userParam.getYzm().equalsIgnoreCase(code)) {//??暂时不要
 			model.addAttribute("msg", "验证码错误!");
 			return "index";
 		}  
@@ -183,16 +178,12 @@ public class LoginAction {
 		if (user!=null) {//没有用户，说明用户名密码错误，返回到首页登录页面index,重新登录
 			
 			
-			Cookie cookie1= new Cookie("ckey", "yes");
-			Cookie cookie2= new Cookie("AdminUser", VipUser);
-			Cookie cookie3= new Cookie("fg", user.getFlag()+"");
-			Cookie cookie4= new Cookie("ips", user.getIp());
-			Cookie cookie5= new Cookie("dt", user.getData());
-			response.addCookie(cookie1);
-			response.addCookie(cookie2);
-			response.addCookie(cookie3);
-			response.addCookie(cookie4);
-			response.addCookie(cookie5);
+			sessionUser.setCkey("yes");
+			sessionUser.setAdminUser(VipUser);
+			sessionUser.setFg(user.getFlag());
+			sessionUser.setIps(user.getIp());
+			sessionUser.setDt(user.getData());
+			model.addAttribute("sessionUser", sessionUser);
 			
              if (user.getFlag()==2) {//加盟合作用户
             	return "user/indexs";//用户登录成功
@@ -204,17 +195,12 @@ public class LoginAction {
 			
 			if (adminUser!=null) {
 				date=adminUser.getData();
-				
-				Cookie cookie1= new Cookie("ckey", "yes");
-				Cookie cookie2= new Cookie("AdminUser", VipUser);
-				Cookie cookie3= new Cookie("fg", adminUser.getFlag()+"");
-				Cookie cookie4= new Cookie("ips", adminUser.getIp());
-				Cookie cookie5= new Cookie("dt", adminUser.getData());
-				response.addCookie(cookie1);
-				response.addCookie(cookie2);
-				response.addCookie(cookie3);
-				response.addCookie(cookie4);
-				response.addCookie(cookie5);
+				sessionUser.setCkey("yes");
+				sessionUser.setAdminUser(VipUser);
+				sessionUser.setFg(adminUser.getFlag());
+				sessionUser.setIps(adminUser.getIp());
+				sessionUser.setDt(adminUser.getData());
+				model.addAttribute("sessionUser", sessionUser);
 				return "admin/index";//登录成功
 			}else {
 				adminUser =loginService.findAdminUsers();
@@ -237,7 +223,7 @@ public class LoginAction {
 						return "admin/indexs";//管理员登录成功
 					} else {
 						model.addAttribute("msg", "用户名密码错误!");//用户名密码错误
-						return "admin/indexs";
+						return "index";
 					}
 				}
 			}
@@ -299,6 +285,14 @@ public class LoginAction {
 		}
 		
 		return "redirect:../viplist.do";
+		
+	}
+	
+	@RequestMapping(value = "/admin/index")
+	public String adminPage(HttpServletRequest request,HttpServletResponse response, Model model) {
+		
+		
+		return "admin/index";
 		
 	}
 }

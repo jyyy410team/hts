@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.jeecms.cms.dao.LoginDao;
 import com.jeecms.cms.dao.Pager;
 import com.jeecms.cms.domain.CmsRole;
+import com.jeecms.cms.service.BaseServiceImpl;
+import com.jeecms.cms.service.IBaseService;
 import com.jeecms.core.Page;
 import com.jeecms.reg.domain.AdminUser;
 import com.jeecms.reg.domain.User;
@@ -19,7 +21,7 @@ import com.jeecms.reg.domain.User;
  * @date 2015-10-26
  *
  */
-public class LoginService {
+public class LoginService extends BaseServiceImpl implements IBaseService{
 	@Autowired
 	LoginDao loginDao;
 
@@ -83,11 +85,7 @@ public class LoginService {
 		
 	}
 	
-	public <T> Page getPageList(Class<T> class1,int pageSize,int pageNo,Boolean istrue,String str) {
-		Page page= loginDao.getPageList( class1,pageSize,pageNo, istrue,str);
-		return page;
-		
-	}
+	
 	
 	public <T> Object getBeanById(Class<T> class1,int id) {
 		Object object = loginDao.getBeanById(class1, id);
